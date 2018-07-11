@@ -72,6 +72,7 @@ export default {
       // If there is a cached query, use that data instead of making an API request
       // If not, make the API request and then cache the value for the amount of time specified in `cacheExpiry`
       if(!this.$ls.get(cacheLabel)){
+        //If no cache exists, this will perform an API call.
         console.log(`No cache detected for ${cacheLabel}.`);
         API.get('find', {
         params: {

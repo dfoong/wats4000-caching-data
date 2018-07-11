@@ -43,7 +43,7 @@ export default {
   },
   created () {
     this.showLoading = true;
-    let cacheLabel = this.$route.params.cityId;
+    let cacheLabel = `currentWeather_${this.$route.params.cityId}`;
     let cacheExpiry = 15 * 60 * 1000; //15 mins
 
     // TODO: Use a conditional to check if the API query has been cached
@@ -60,6 +60,7 @@ console.log(`No cache detected for ${cacheLabel}.`);
     .then(response => {
       this.showLoading = false;
       this.weatherData = response.data;
+      this.$ls.set(cacheLabel, this.weatherData, cacheExpiry);
     })
     .catch(error => {
       this.showLoading = false;
@@ -70,6 +71,8 @@ console.log(`No cache detected for ${cacheLabel}.`);
     });
   } else {
     console.log(`Cache detected for ${cacheLabel}.`);
+    this.weatherData = this.$ls.get(cacheLabel);
+    this.showLoading = false; 
   }
 }
 }

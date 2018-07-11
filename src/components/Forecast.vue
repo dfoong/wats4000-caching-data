@@ -64,6 +64,7 @@ export default {
     .then(response => {
       this.showLoading = false;
       this.weatherData = response.data;
+      this.$ls.set(cacheLabel, this.weatherData, cacheExpiry);
     })
     .catch(error => {
       this.showLoading = false;
@@ -75,7 +76,7 @@ export default {
     } else {
       console.log(`Cache detected for ${cacheLabel}.`);
       this.weatherData = this.$ls.get(cacheLabel);
-      
+      this.showLoading = false;
     }
     },
   filters: {
