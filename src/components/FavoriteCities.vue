@@ -19,10 +19,9 @@ export default {
   },
   methods: {
     removeCity: function (city) {
-      // TODO: Add logic to remove a city from the `favoriteCities` array.
-      // Hint: Use `indexOf(city)` on the `this.favoriteCities` array and then use the `splice()` method
-
-      // TODO: Save the new favoriteCities array to the cache.
+      let cityIndex = this.favoriteCities.indexOf(city);
+      this.favoriteCities.splice(cityIndex, 1);
+      this.$ls.set('favoriteCities', this.favoriteCities);
     }
   }
 }
@@ -31,16 +30,16 @@ export default {
 <style scoped>
 .favorite-cities {
   list-style-type: none;
-  padding: 10px;
-  background: #ccc;
+  padding: 40px;
+  background: #d0e6e9;
   width: 25%;
   float: right;
 }
 .remove {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: white;
-  background: #AA0000;
-  padding: 2px;
+  background: #25bb17;
+  padding: 4px;
   cursor: pointer;
 }
 </style>

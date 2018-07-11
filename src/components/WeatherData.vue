@@ -1,13 +1,13 @@
 <template>
     <dl>
         <dt v-if="weatherData.temp != weatherData.temp_min">Current Temp</dt>
-        <dd v-if="weatherData.temp != weatherData.temp_min">{{ weatherData.temp }}&deg;F</dd>
+        <dd v-if="weatherData.temp != weatherData.temp_min">{{ weatherData.temp }}&deg;C</dd>
         <dt>Humidity</dt>
         <dd>{{ weatherData.humidity }}%</dd>
         <dt>High</dt>
-        <dd>{{ weatherData.temp_max }}&deg;F</dd>
+        <dd>{{ weatherData.temp_max }}&deg;C</dd>
         <dt>Low</dt>
-        <dd>{{ weatherData.temp_min }}&deg;F</dd>
+        <dd>{{ weatherData.temp_min }}&deg;C</dd>
     </dl>
 </template>
 
@@ -28,7 +28,8 @@ export default {
 <style scoped>
 dl {
   padding: 5px;
-  background: #e8e8e8;
+  color: #000000;
+  background: #d0e6e9;
 }
 dt {
   float: left;
@@ -36,7 +37,7 @@ dt {
   width: 120px;
   text-align: right;
   font-weight: bold;
-  color: blue;
+  color: #3e4a58;
 }
 dd {
   margin: 0 0 0 130px;

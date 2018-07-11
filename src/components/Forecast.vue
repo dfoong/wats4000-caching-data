@@ -46,18 +46,17 @@ export default {
   },
   created () {
     this.showLoading = true;
+    let cacheLabel = `forecast_${this.$route.params.cityId}`;
 
-    // TODO: Cache these API results using the City ID as the label
-
-    // TODO: Create a cacheLabel value
-
-    // TODO: Create a cacheExpiry value set to 15 minutes in milliseconds
+    let cacheExpiry = 15 * 60 * 1000; // 15 minutes 
 
     // TODO: Use a conditional to check if the API query has been cached
     // If so, use that cached data
     // If not, make the API call and cache the data with the cacheLabel and cacheExpiry defined above
-
-    API.get('forecast', {
+    
+    if (!this.$ls.get(cacheLabel)){
+      console.log(`No cache detected for ${cacheLabel}.`);
+      API.get('forecast', {
       params: {
           id: this.$route.params.cityId
       }
@@ -73,7 +72,12 @@ export default {
         text: error.message
       });
     });
-  },
+    } else {
+      console.log(`Cache detected for ${cacheLabel}.`);
+      this.weatherData = this.$ls.get(cacheLabel);
+      
+    }
+    },
   filters: {
     formatDate: function (timestamp){
       let date = new Date(timestamp * 1000);
